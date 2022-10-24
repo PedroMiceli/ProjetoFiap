@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Investimento {
     private int idInvestimento;
@@ -9,7 +10,7 @@ public class Investimento {
     private LocalDate dtResgate;
     private int id_usuario;
 
-    public Investimento(int idInvestimento, String dsInvestimento, double vlrInvestimento, LocalDate dtInvestimento, LocalDate dtVencimento, LocalDate dtResgate, int id_usuario) {
+    public Investimento(int idInvestimento, String dsInvestimento, double vlrInvestimento, Calendar dtInvestimento, Calendar dtVencimento, Calendar dtResgate, int id_usuario) {
         this.idInvestimento = idInvestimento;
         this.dsInvestimento = dsInvestimento;
         this.vlrInvestimento = vlrInvestimento;

@@ -1,4 +1,8 @@
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class InvestimentoDAO {
     private Connection conexao;
@@ -34,24 +38,40 @@ public class InvestimentoDAO {
         }
     }
 
-    public void getAll(int id_usuario){
+    public List<Investimento> getAll(){
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        List<Investimento> lista = new ArrayList<Investimento>();
 
         try{
             conexao = Connector.conectar();
 
-            String sql = "SELECT * FROM T_INVESTIMENTO WHERE ID_USUARIO = ?";
+            String sql = "SELECT * FROM T_INVESTIMENTO";
             stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, id_usuario);
             rs = stmt.executeQuery();
 
+
             while (rs.next()){
-            int codigo = rs.getInt("id_investimento");
+            int codigo = rs.getInt("id_Investimento");
+            String dsinvestimento = rs.getString("DS_INVESTIMENTO");
+            double vlrInvestimento = rs.getDouble("vlrInvestimento");
 
+            java.sql.Date dt_Investimento = rs.getDate("dtInvestimento");
+            Calendar dtInvestimento = Calendar.getInstance();
+            dtInvestimento.setTimeInMillis(dt_Investimento.getTime());
 
-                investimento = new Investimento();
+            java.sql.Date dt_Vencimento = rs.getDate("dtVencimento");
+            Calendar dtVencimento = Calendar.getInstance();
+            dtVencimento.setTimeInMillis(dt_Vencimento.getTime());
 
+            java.sql.Date dt_Resgate = rs.getDate("dtResgate");
+            Calendar dtResgate = Calendar.getInstance();
+            dtResgate.setTimeInMillis(dt_Resgate.getTime());
+
+            int id_usuario = rs.getInt("id_usuario");
+
+            Investimento investimento = new Investimento(codigo, dsinvestimento, vlrInvestimento, dtInvestimento, dtVencimento, dtResgate, id_usuario);
+            lista.add(investimento);
             }
 
 
@@ -66,7 +86,6 @@ public class InvestimentoDAO {
                 e.printStackTrace();
             }
         }
-        return ;
-
+        return lista;
     }
 }
