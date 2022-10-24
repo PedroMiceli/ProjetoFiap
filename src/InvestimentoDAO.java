@@ -22,7 +22,7 @@ public class InvestimentoDAO {
             stmt.setInt(4, id_usuario);
             Date dataVencimento = Date.valueOf(investimento.getDtVencimento());
             stmt.setDate(5, dataVencimento);
-            Date dataResgate = Date.valueOf(investimento.getDtResgate());
+            Date dataResgate = Calendar.valueOf(investimento.getDtResgate());
             stmt.setDate(6, dataResgate);
 
             stmt.executeUpdate();

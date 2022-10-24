@@ -5,9 +5,9 @@ public class Investimento {
     private int idInvestimento;
     private String dsInvestimento;
     private double vlrInvestimento;
-    private LocalDate dtInvestimento;
-    private LocalDate dtVencimento;
-    private LocalDate dtResgate;
+    private Calendar dtInvestimento;
+    private Calendar dtVencimento;
+    private Calendar dtResgate;
     private int id_usuario;
 
     public Investimento(int idInvestimento, String dsInvestimento, double vlrInvestimento, Calendar dtInvestimento, Calendar dtVencimento, Calendar dtResgate, int id_usuario) {
@@ -44,27 +44,27 @@ public class Investimento {
         this.vlrInvestimento = vlrInvestimento;
     }
 
-    public LocalDate getDtInvestimento() {
+    public Calendar getDtInvestimento() {
         return dtInvestimento;
     }
 
-    public void setDtInvestimento(LocalDate dtInvestimento) {
+    public void setDtInvestimento(Calendar dtInvestimento) {
         this.dtInvestimento = dtInvestimento;
     }
 
-    public LocalDate getDtVencimento() {
+    public Calendar getDtVencimento() {
         return dtVencimento;
     }
 
-    public void setDtVencimento(LocalDate dtVencimento) {
+    public void setDtVencimento(Calendar dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 
-    public LocalDate getDtResgate() {
+    public Calendar getDtResgate() {
         return dtResgate;
     }
 
-    public void setDtResgate(LocalDate dtResgate) {
+    public void setDtResgate(Calendar dtResgate) {
         this.dtResgate = dtResgate;
     }
 
