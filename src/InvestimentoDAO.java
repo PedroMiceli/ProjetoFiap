@@ -1,18 +1,15 @@
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class InvestimentoDAO {
     private Connection conexao;
 
-    public void cadastrar(Investimento investimento, int id_usuario){
+    public void insert(Investimento investimento, int id_usuario){
         PreparedStatement stmt = null;
 
         try{
             conexao = Connector.conectar();
             String sql = "INSERT INTO T_INVESTIMENTO (DS_INVESTIMENTO, VLR_INVESTIMENTO, DT_INVESTIMENTO, ID_USUARIO,\n" +
-                    "DT_VENCIMENTO, DT_RESGATE) VALUES(?,?,?,?,?,?)";
+                    "DT_VENCIMENTO, DT_RESGATE, ) VALUES(?,?,?,?,?,?)";
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, investimento.getDsInvestimento());
             stmt.setDouble(2, investimento.getVlrInvestimento());
@@ -37,7 +34,39 @@ public class InvestimentoDAO {
         }
     }
 
-    public void deletar(Investimento investimento){
+    public void getAll(int id_usuario){
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try{
+            conexao = Connector.conectar();
+
+            String sql = "SELECT * FROM T_INVESTIMENTO WHERE ID_USUARIO = ?";
+            stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, id_usuario);
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+            int codigo = rs.getInt("id_investimento");
+
+
+                investimento = new Investimento();
+
+            }
+
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                rs.close();
+                conexao.close();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return ;
 
     }
 }
