@@ -11,6 +11,20 @@ public class UsuarioDAO {
 
     private Connection conexao;
 
+    public void insert(Usuario usuario){
+        PreparedStatement stmt = null;
+        try{
+            conexao = Connector.conectar();
+            String sql = "INSERT";
+            stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1,usuario.getId_usuario());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public Usuario get(int id_usuario) {
         PreparedStatement stmt = null;
         ResultSet rs = null;
