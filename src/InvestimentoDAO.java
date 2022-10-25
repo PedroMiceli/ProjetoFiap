@@ -17,12 +17,12 @@ public class InvestimentoDAO {
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, investimento.getDsInvestimento());
             stmt.setDouble(2, investimento.getVlrInvestimento());
-            Date dataInvestimento = Date.valueOf(investimento.getDtInvestimento());
+            java.sql.Date dataInvestimento = new java.sql.Date(investimento.getDtInvestimento().getTimeInMillis());
             stmt.setDate(3, dataInvestimento);
             stmt.setInt(4, id_usuario);
-            Date dataVencimento = Date.valueOf(investimento.getDtVencimento());
+            java.sql.Date dataVencimento = new java.sql.Date(investimento.getDtVencimento().getTimeInMillis());
             stmt.setDate(5, dataVencimento);
-            Date dataResgate = Calendar.valueOf(investimento.getDtResgate());
+            java.sql.Date dataResgate = new java.sql.Date(investimento.getDtResgate().getTimeInMillis());
             stmt.setDate(6, dataResgate);
 
             stmt.executeUpdate();

@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +16,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         try{
             conexao = Connector.conectar();
-            String sql = "INSERT";
+            String sql = "INSERT INTO T_COLABORADOR()";
             stmt = conexao.prepareStatement(sql);
             stmt.setInt(1,usuario.getId_usuario());
             stmt.executeUpdate();
@@ -29,6 +30,9 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
+        Calendar c = Calendar.getInstance();
+        DateFormat f = DateFormat.getDateInstance();
+
 
         Usuario usuario = null;
         try {
@@ -41,6 +45,7 @@ public class UsuarioDAO {
             String nmusuario = rs.getString("NM_USUARIO");
             String dsemail = rs.getString("DS_EMAIL");
             java.sql.Date dt_nascimento = rs.getDate("DT_NASCIMENTO");
+            Date dt_nascimento = f.parse()
             String senha = rs.getString("SENHA");
             int nmrcelular = rs.getInt("NMR_CELULAR");
             String cpfusuario = rs.getString("CPF_USUARIO");
