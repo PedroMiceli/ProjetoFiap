@@ -1,28 +1,33 @@
 import java.sql.*;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class InvestimentoDAO {
     private Connection conexao;
 
-    public void insert(Investimento investimento, int id_usuario){
+    public void Insert(Investimento investimento){
         PreparedStatement stmt = null;
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         try{
             conexao = Connector.conectar();
             String sql = "INSERT INTO T_INVESTIMENTO (DS_INVESTIMENTO, VLR_INVESTIMENTO, DT_INVESTIMENTO, ID_USUARIO,\n" +
-                    "DT_VENCIMENTO, DT_RESGATE, ) VALUES(?,?,?,?,?,?)";
+                    "DT_VENCIMENTO, DT_RESGATE) VALUES(?,?,?,?,?,?)";
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, investimento.getDsInvestimento());
             stmt.setDouble(2, investimento.getVlrInvestimento());
-            java.sql.Date dataInvestimento = new java.sql.Date(investimento.getDtInvestimento().getTimeInMillis());
+
+            Date dataInvestimento = Date.valueOf(formatter.format(investimento.getDtInvestimento()));
             stmt.setDate(3, dataInvestimento);
-            stmt.setInt(4, id_usuario);
-            java.sql.Date dataVencimento = new java.sql.Date(investimento.getDtVencimento().getTimeInMillis());
+            stmt.setInt(4, investimento.getIdUsuario());
+            Date dataVencimento = Date.valueOf(formatter.format(investimento.getDtVencimento()));
             stmt.setDate(5, dataVencimento);
-            java.sql.Date dataResgate = new java.sql.Date(investimento.getDtResgate().getTimeInMillis());
+            Date dataResgate = Date.valueOf(formatter.format(investimento.getDtResgate()));
             stmt.setDate(6, dataResgate);
 
             stmt.executeUpdate();
@@ -52,26 +57,26 @@ public class InvestimentoDAO {
 
 
             while (rs.next()){
-            int codigo = rs.getInt("id_Investimento");
-            String dsinvestimento = rs.getString("DS_INVESTIMENTO");
-            double vlrInvestimento = rs.getDouble("vlrInvestimento");
+                int codigo = rs.getInt("ID_INVESTIMENTO");
+                String dsInvestimento = rs.getString("DS_INVESTIMENTO");
+                double vlrInvestimento = rs.getDouble("VLR_INVESTIMENTO");
 
-            java.sql.Date dt_Investimento = rs.getDate("dtInvestimento");
-            Calendar dtInvestimento = Calendar.getInstance();
-            dtInvestimento.setTimeInMillis(dt_Investimento.getTime());
+                java.sql.Date dtInvestimento = rs.getDate("DT_INVESTIMENTO");
+                //Calendar dtInvestimento = Calendar.getInstance();
+                //dtInvestimento.setTimeInMillis(dt_Investimento.getTime());
 
-            java.sql.Date dt_Vencimento = rs.getDate("dtVencimento");
-            Calendar dtVencimento = Calendar.getInstance();
-            dtVencimento.setTimeInMillis(dt_Vencimento.getTime());
+                java.sql.Date dtVencimento = rs.getDate("DT_INVESTIMENTO");
+                //Calendar dtVencimento = Calendar.getInstance();
+                //dtVencimento.setTimeInMillis(dt_Vencimento.getTime());
 
-            java.sql.Date dt_Resgate = rs.getDate("dtResgate");
-            Calendar dtResgate = Calendar.getInstance();
-            dtResgate.setTimeInMillis(dt_Resgate.getTime());
+                java.sql.Date dtResgate = rs.getDate("DT_RESGATE");
+                //Calendar dtResgate = Calendar.getInstance();
+                //dtResgate.setTimeInMillis(dt_Resgate.getTime());
 
-            int id_usuario = rs.getInt("id_usuario");
+                int idUsuario = rs.getInt("ID_USUARIO");
 
-            Investimento investimento = new Investimento(codigo, dsinvestimento, vlrInvestimento, dtInvestimento, dtVencimento, dtResgate, id_usuario);
-            lista.add(investimento);
+                Investimento investimento = new Investimento(codigo, dsInvestimento, vlrInvestimento, dtInvestimento, dtVencimento, dtResgate, idUsuario);
+                lista.add(investimento);
             }
 
 
@@ -88,4 +93,5 @@ public class InvestimentoDAO {
         }
         return lista;
     }
+
 }

@@ -1,23 +1,22 @@
-import java.time.LocalDate;
-import java.util.Calendar;
+import java.util.Date;
 
 public class Investimento {
     private int idInvestimento;
     private String dsInvestimento;
     private double vlrInvestimento;
-    private Calendar dtInvestimento;
-    private Calendar dtVencimento;
-    private Calendar dtResgate;
-    private int id_usuario;
+    private Date dtInvestimento;
+    private Date dtVencimento;
+    private Date dtResgate;
+    private int idUsuario;
 
-    public Investimento(int idInvestimento, String dsInvestimento, double vlrInvestimento, Calendar dtInvestimento, Calendar dtVencimento, Calendar dtResgate, int id_usuario) {
+    public Investimento(int idInvestimento, String dsInvestimento, double vlrInvestimento, Date dtInvestimento, Date dtVencimento, Date dtResgate, int idUsuario) {
         this.idInvestimento = idInvestimento;
         this.dsInvestimento = dsInvestimento;
         this.vlrInvestimento = vlrInvestimento;
         this.dtInvestimento = dtInvestimento;
         this.dtVencimento = dtVencimento;
         this.dtResgate = dtResgate;
-        this.id_usuario = id_usuario;
+        this.idUsuario = idUsuario;
     }
 
     public int getIdInvestimento() {
@@ -44,35 +43,35 @@ public class Investimento {
         this.vlrInvestimento = vlrInvestimento;
     }
 
-    public Calendar getDtInvestimento() {
+    public Date getDtInvestimento() {
         return dtInvestimento;
     }
 
-    public void setDtInvestimento(Calendar dtInvestimento) {
+    public void setDtInvestimento(Date dtInvestimento) {
         this.dtInvestimento = dtInvestimento;
     }
 
-    public Calendar getDtVencimento() {
+    public Date getDtVencimento() {
         return dtVencimento;
     }
 
-    public void setDtVencimento(Calendar dtVencimento) {
+    public void setDtVencimento(Date dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 
-    public Calendar getDtResgate() {
+    public Date getDtResgate() {
         return dtResgate;
     }
 
-    public void setDtResgate(Calendar dtResgate) {
+    public void setDtResgate(Date dtResgate) {
         this.dtResgate = dtResgate;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

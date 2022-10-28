@@ -41,17 +41,6 @@ public class UsuarioDAO {
             stmt.setInt(1, id_usuario);
             stmt = conexao.prepareStatement(sql);
             rs = stmt.executeQuery();
-            int id = rs.getInt("ID_USUARIO");
-            String nmusuario = rs.getString("NM_USUARIO");
-            String dsemail = rs.getString("DS_EMAIL");
-            java.sql.Date dt_nascimento = rs.getDate("DT_NASCIMENTO");
-            Date dt_nascimento = f.parse()
-            String senha = rs.getString("SENHA");
-            int nmrcelular = rs.getInt("NMR_CELULAR");
-            String cpfusuario = rs.getString("CPF_USUARIO");
-
-
-            usuario = new Usuario(id, nmusuario, dsemail, dt_nascimento, senha, nmrcelular, cpfusuario);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -86,8 +75,8 @@ public class UsuarioDAO {
                 int nmr_celular = rs.getInt("nmr_celular");
                 String cpf_usuario = rs.getString("cpf_usuario");
 
-                Usuario usuario = new Usuario(id_usuario,nm_usuario,ds_email, dt_nascimento,senha,nmr_celular,cpf_usuario);
-                usuarios.add(usuario);
+                //Usuario usuario = new Usuario(id_usuario,nm_usuario,ds_email, dt_nascimento,senha,nmr_celular,cpf_usuario);
+                //usuarios.add(usuario);
             }
         }catch (SQLException e){
             e.printStackTrace();
